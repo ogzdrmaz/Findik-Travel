@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7efe9">
-<title>Nilssb Rehber · Fındık Travel</title>
+<title>Fındık Travel</title>
 <style>
 :root{
   --bg:#fbf7f3;--card:#fffdfb;--ink:#292321;--muted:#82766f;--line:#eadfd8;
@@ -86,7 +86,7 @@ footer{border-top:1px solid var(--line);text-align:center;padding:35px 20px;colo
 </head>
 <body>
 <header class="top"><nav class="nav">
-  <div class="brand"><div class="logo">♡</div><div>Nilssb Rehber<br><small style="color:#a3837a;font-weight:600">Fındık Travel</small></div></div>
+  <div class="brand"><div class="logo">♡</div><div>Fındık Travel<br><small style="color:#a3837a;font-weight:600">Fındık Travel</small></div></div>
   <div class="navlinks"><button onclick="scrollToId('kesfet')">Keşfet</button><button onclick="scrollToId('plan')">Planımız</button><button onclick="openMapPicker()">🗺️ Harita</button><button onclick="openFavorites()">♡ Favoriler</button></div>
 </nav></header>
 
@@ -105,7 +105,7 @@ footer{border-top:1px solid var(--line);text-align:center;padding:35px 20px;colo
   <select id="sort" onchange="render()"><option value="score">✨ Önerilen</option><option value="rating">⭐ Puan</option><option value="price">💶 Ucuzdan pahalıya</option></select>
 </div></div>
 
-<div class="smartbar"><span>✦ <b>Nilssb Score</b> = puan + fiyat + müşteri deneyimi + romantiklik</span><button onclick="showHow()">Nasıl hesaplıyoruz?</button></div><div class="tabs"><button class="tab active" onclick="setTab(this,'all')">Hepsi</button><button class="tab" onclick="setTab(this,'Beach')">🏖️ Beach</button><button class="tab" onclick="setTab(this,'Restoran')">🍽️ Restoran</button><button class="tab" onclick="setTab(this,'Dondurma')">🍦 Dondurma</button><button class="tab" onclick="setTab(this,'Alışveriş')">🛍️ Alışveriş</button><button class="tab" onclick="setTab(this,'Kahve')">☕ Kahve</button></div>
+<div class="smartbar"><span>✦ <b>Fındık Travel Score</b> = puan + fiyat + müşteri deneyimi + romantiklik</span><button onclick="showHow()">Nasıl hesaplıyoruz?</button></div><div class="tabs"><button class="tab active" onclick="setTab(this,'all')">Hepsi</button><button class="tab" onclick="setTab(this,'Beach')">🏖️ Beach</button><button class="tab" onclick="setTab(this,'Restoran')">🍽️ Restoran</button><button class="tab" onclick="setTab(this,'Dondurma')">🍦 Dondurma</button><button class="tab" onclick="setTab(this,'Alışveriş')">🛍️ Alışveriş</button><button class="tab" onclick="setTab(this,'Kahve')">☕ Kahve</button></div>
 
 <main>
   <div class="sectionHead"><div><h2>Fındık Travel'ın seçtikleri</h2><span id="count"></span></div><button class="pill" onclick="toggleCompare()">⚖️ Karşılaştır <b id="cmpCount">0</b></button></div>
@@ -119,7 +119,7 @@ footer{border-top:1px solid var(--line);text-align:center;padding:35px 20px;colo
     <div class="day"><small>04–05 · THASSOS</small><h3>Marble + Golden ♡</h3><p>Mermer Beach → Limenas → Golden Beach veya Paradise Beach → gün batımında taverna → dondurma.</p></div>
   </div>
 </main>
-<footer>Nilssb Rehber · Fındık Travel için yapıldı ♡<br><span>Fiyatlar ve çalışma saatleri sezona göre değişebilir; gitmeden önce işletmenin güncel durumunu kontrol edin.</span></footer>
+<footer><div style="max-width:900px;margin:0 auto 12px"><b>Veri kalitesi:</b> Aynı işletme farklı adlarla listeleniyorsa tek kayıtta birleştirilir. Doğrulanamayan fiyat, puan ve menü bilgisi tahmin edilmez.</div>Fındık Travel ♡<br><span>Fiyatlar ve çalışma saatleri sezona göre değişebilir; gitmeden önce işletmenin güncel durumunu kontrol edin.</span></footer>
 
 <div class="modal" id="modal"><div class="sheet"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
 
@@ -175,13 +175,25 @@ for(const [name,area] of comprehensiveThassosCatalog){
   places.push({id:nextId++,name,area,type:"Restoran",price:0,rating:null,score:0,emoji:"🍽️",cls:"c3",img:"",tags:["Thassos",area],desc:"İnternette güncel işletme listesinde yer alıyor. Detaylı puan/fiyat verisi doğrulanmadı.",review:"Güncel müşteri yorumu özeti için doğrulanmış veri bulunamadı.",pros:"Bilgi yok",cons:"Bilgi yok",scores:[0,0,0,0,0],menuItems:[],menuNote:"Menü tarihi doğrulanamadı."});
 }
 
+
+const aliases={"la scala":"la scala","la scala beach":"la scala","la scala seaside experience":"la scala","la scala - seaside experience":"la scala","thassian doukas":"thassian doukas","thassian doukas restaurant":"thassian doukas","gelateria italos":"gelateria italos","gelateria italos alexandroupoli":"gelateria italos"};
+function normName(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[–—]/g,"-").replace(/[^a-z0-9ğüşöçı\s-]/gi," ").replace(/\s+/g," ").trim()}
+function canonicalName(s){const n=normName(s);return aliases[n]||n}
+function mergeRecord(a,b){const good=x=>x!==null&&x!==undefined&&x!==""&&x!=="Bilgi yok";["rating","price","score","img","review","pros","cons","note","menuYear","menuNote"].forEach(k=>{if(!good(a[k])&&good(b[k]))a[k]=b[k]});if((!a.tags||a.tags.length<2)&&b.tags?.length)a.tags=[...b.tags];if((!a.scores||a.scores.every(x=>!x))&&b.scores)a.scores=b.scores;if((!a.menuItems||!a.menuItems.length)&&b.menuItems?.length)a.menuItems=b.menuItems;return a}
+function dedupePlaces(){const map=new Map(),out=[];for(const p of places){const key=canonicalName(p.name)+"|"+normName(p.area);if(!map.has(key)){map.set(key,p);out.push(p)}else mergeRecord(map.get(key),p)}places.length=0;places.push(...out)}
+dedupePlaces();
 let tab="all", favorites=JSON.parse(localStorage.getItem("nilssbFav")||"[]"), compare=JSON.parse(localStorage.getItem("nilssbCmp")||"[]");
 const euro=n=>n? "€".repeat(n):"Bilgi yok";
 const mapUrl=p=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(p.name+" "+p.area+" Greece");
 function setTab(el,t){tab=t;document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));el.classList.add("active");render()}
+
+const QA_PROFILES=[{name:"Romantik çift",checks:["Romantiklik","gün batımı","dondurma","beach"]},{name:"Bütçe odaklı gezgin",checks:["€","fiyat-performans","ucuz"]},{name:"Beach + yemek keşifçisi",checks:["Beach","Restoran","Potos","Limenas"]}];
+function runReleaseQA(){const keys=places.map(p=>canonicalName(p.name)+"|"+normName(p.area));return{profiles:QA_PROFILES.length,duplicateRecords:keys.length-new Set(keys).size,invalidRecords:places.filter(p=>!p.name||!p.area||!p.type).length,invalidScores:places.filter(p=>p.scores?.some(x=>x<0||x>100)).length,uniquePlaces:new Set(keys).size}}
+const releaseQA=runReleaseQA();
+
 function render(){
  const q=document.getElementById("search").value.toLowerCase(), area=document.getElementById("place").value, type=document.getElementById("type").value, price=document.getElementById("price").value, sort=document.getElementById("sort").value;
- let arr=places.filter(p=>(tab==="all"||p.type===tab)&&(!q||(p.name+" "+p.area+" "+p.tags.join(" ")).toLowerCase().includes(q))&&(area==="all"||p.area===area)&&(type==="all"||p.type===type)&&(price==="all"||p.price==price));
+ let arr=places.filter(p=>(tab==="all"||p.type===tab)&&(!q||(p.name+" "+p.area+" "+p.tags.join(" ")+" "+(p.desc||"")+" "+(p.review||"")).toLowerCase().includes(q))&&(area==="all"||p.area===area)&&(type==="all"||p.type===type)&&(price==="all"||p.price==price));
  arr.sort((a,b)=>sort==="rating"?b.rating-a.rating:sort==="price"?a.price-b.price:b.score-a.score);
  document.getElementById("count").textContent=arr.length+" sonuç";
  document.getElementById("grid").innerHTML=arr.length?arr.map(card).join(""):`<div class="empty" style="grid-column:1/-1">Bu filtrelerde sonuç bulamadık. Aramayı biraz genişlet ♡</div>`;
@@ -190,7 +202,7 @@ function render(){
 }
 function card(p){
  const fav=favorites.includes(p.id), cmp=compare.includes(p.id);
- return `<article class="card"><div class="cover ${p.cls}" style="background-image:url('${p.img||""}')"><div class="emoji">${p.emoji}</div><span class="tag">${p.area} · ${p.type}</span><button class="heart" onclick="fav(${p.id})">${fav?"♥":"♡"}</button></div><div class="body"><div class="row"><div class="title">${p.name}</div><div class="rating">${p.rating?`★ ${p.rating}`:"Bilgi yok"}</div></div><div class="meta">${euro(p.price)} · ${p.tags.slice(0,2).join(" · ")} · Müşteri skoru ${p.scores?Math.round(p.scores.reduce((a,b)=>a+b,0)/5):"Bilgi yok"}/100</div><div class="desc">${p.desc}</div><div class="chips">${p.tags.map(x=>`<span class="chip">${x}</span>`).join("")}</div>${p.menuItems?.length?`<div class="menuBox"><div class="row"><span class="menuTitle">🍽️ Menüden örnek fiyatlar</span><span class="menuAge ${p.menuOld?"old":""}">${p.menuYear}</span></div><div class="menuItems">${p.menuItems.slice(0,4).map(x=>`<span>${x[0]} <b>€${x[1]}</b></span>`).join("")}</div><div class="sourceNote">Fiyat, yayınlanan menüde görünen değerdir. ${p.menuNote||""}</div></div>`:`<div class="menuBox"><div class="row"><span class="menuTitle">🍽️ Menü fiyatları</span><span class="menuAge old">Bilgi yok</span></div><div class="sourceNote">Doğrulanmış güncel menü fiyatı bulunamadı; tahmini fiyat eklenmedi.</div></div>`}<div class="actions"><a class="primary" href="${mapUrl(p)}" target="_blank">📍 Haritada aç</a><button onclick="toggleCmp(${p.id})">${cmp?"✓ Seçildi":"⚖️ Karşılaştır"}</button></div></div></article>`;
+ return `<article class="card"><div class="cover ${p.cls}" style="background-image:${p.img ? "url(\"" + p.img + "\")" : "linear-gradient(135deg,#eee1dc,#dfece5)"}"><div class="emoji">${p.emoji}</div><span class="tag">${p.area} · ${p.type}</span><button class="heart" onclick="fav(${p.id})">${fav?"♥":"♡"}</button></div><div class="body"><div class="row"><div class="title">${p.name}</div><div class="rating">${p.rating?`★ ${p.rating}`:"Bilgi yok"}</div></div><div class="meta">${euro(p.price)} · ${p.tags.slice(0,2).join(" · ")} · Müşteri skoru ${p.scores?Math.round(p.scores.reduce((a,b)=>a+b,0)/5):"Bilgi yok"}/100</div><div class="desc">${p.desc}</div><div class="chips">${p.tags.map(x=>`<span class="chip">${x}</span>`).join("")}</div>${p.menuItems?.length?`<div class="menuBox"><div class="row"><span class="menuTitle">🍽️ Menüden örnek fiyatlar</span><span class="menuAge ${p.menuOld?"old":""}">${p.menuYear}</span></div><div class="menuItems">${p.menuItems.slice(0,4).map(x=>`<span>${x[0]} <b>€${x[1]}</b></span>`).join("")}</div><div class="sourceNote">Fiyat, yayınlanan menüde görünen değerdir. ${p.menuNote||""}</div></div>`:`<div class="menuBox"><div class="row"><span class="menuTitle">🍽️ Menü fiyatları</span><span class="menuAge old">Bilgi yok</span></div><div class="sourceNote">Doğrulanmış güncel menü fiyatı bulunamadı; tahmini fiyat eklenmedi.</div></div>`}<div class="actions"><a class="primary" href="${mapUrl(p)}" target="_blank">📍 Haritada aç</a><button onclick="toggleCmp(${p.id})">${cmp?"✓ Seçildi":"⚖️ Karşılaştır"}</button></div></div></article>`;
 }
 function fav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];localStorage.setItem("nilssbFav",JSON.stringify(favorites));render()}
 function toggleCmp(id){compare=compare.includes(id)?compare.filter(x=>x!==id):compare.length<4?[...compare,id]:compare;localStorage.setItem("nilssbCmp",JSON.stringify(compare));render()}
@@ -219,7 +231,7 @@ function openMapPicker(){
  modal.classList.add("show")
 }
 function showHow(){
- document.getElementById("modalContent").innerHTML=`<div class="eyebrow">Nilssb Score</div><h2>Nasıl karar veriyoruz?</h2><p>Bu uygulamada tek bir yıldız puanına güvenmek yerine müşterinin tatil kararını etkileyen beş ayrı boyut kullanılıyor.</p><div class="chips"><span class="chip">🌊 Deniz / lezzet</span><span class="chip">💶 Fiyat-performans</span><span class="chip">👥 Sakinlik</span><span class="chip">💕 Romantiklik</span><span class="chip">📍 Ulaşım / konum</span></div><p style="color:var(--muted);font-size:13px">Menü fiyatları varsa menünün yayınlanma yılı ayrıca gösterilir. Eski menü güncelmiş gibi sunulmaz; tarih bilinmiyorsa <b>Bilgi yok</b> yazar.</p>`;
+ document.getElementById("modalContent").innerHTML=`<div class="eyebrow">Fındık Travel Score</div><h2>Nasıl karar veriyoruz?</h2><p>Bu uygulamada tek bir yıldız puanına güvenmek yerine müşterinin tatil kararını etkileyen beş ayrı boyut kullanılıyor.</p><div class="chips"><span class="chip">🌊 Deniz / lezzet</span><span class="chip">💶 Fiyat-performans</span><span class="chip">👥 Sakinlik</span><span class="chip">💕 Romantiklik</span><span class="chip">📍 Ulaşım / konum</span></div><p style="color:var(--muted);font-size:13px">Menü fiyatları varsa menünün yayınlanma yılı ayrıca gösterilir. Eski menü güncelmiş gibi sunulmaz; tarih bilinmiyorsa <b>Bilgi yok</b> yazar.</p>`;
  document.getElementById("modal").classList.add("show")
 }
 
