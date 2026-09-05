@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#120c17">
+<title>Fındık Gezi Rehberi • Nilssb</title>
+<style>
+:root{
+  --bg:#0d0a10; --panel:#17111c; --panel2:#211625; --text:#fff8ff; --muted:#b9aebb;
+  --pink:#ff5fa2; --pink2:#ff8dc0; --lav:#b98cff; --gold:#ffd78a; --green:#6ee7b7;
+  --line:rgba(255,255,255,.09); --shadow:0 24px 70px rgba(0,0,0,.38); --r:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+ radial-gradient(circle at 10% 0%,rgba(255,95,162,.18),transparent 30%),
+ radial-gradient(circle at 90% 10%,rgba(185,140,255,.15),transparent 28%),var(--bg);
+ color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.app{max-width:1400px;margin:auto;padding:18px 18px 90px}
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(22px);background:rgba(13,10,16,.72);border-bottom:1px solid var(--line)}
+.nav{max-width:1400px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 18px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.5px}
+.logo{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink),var(--lav));box-shadow:0 10px 30px rgba(255,95,162,.28);font-size:20px}
+.brand small{display:block;color:var(--pink2);font-weight:700;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.navlinks{display:flex;gap:6px}
+.navlinks button,.iconbtn{background:transparent;border:1px solid transparent;color:var(--muted);padding:9px 12px;border-radius:12px}
+.navlinks button:hover,.iconbtn:hover{background:var(--panel);color:white}
+.hero{padding:48px 4px 28px;display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:end}
+.kicker{color:var(--pink2);font-size:12px;font-weight:900;letter-spacing:2.4px;text-transform:uppercase}
+h1{font-size:clamp(42px,7vw,82px);line-height:.9;margin:12px 0 18px;letter-spacing:-5px}
+.gradient{background:linear-gradient(90deg,#fff,#ff8dc0 55%,#c8a8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:720px;color:var(--muted);font-size:17px;line-height:1.65;margin:0}
+.trip-card{background:linear-gradient(145deg,rgba(255,95,162,.14),rgba(185,140,255,.08));border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:var(--shadow)}
+.trip-card .big{font-size:34px;font-weight:900}
+.trip-card .mini{color:var(--muted);font-size:13px;margin-top:4px}
+.progress{height:8px;background:rgba(255,255,255,.08);border-radius:20px;margin:18px 0 12px;overflow:hidden}
+.progress i{display:block;width:76%;height:100%;background:linear-gradient(90deg,var(--pink),var(--lav));border-radius:20px}
+.tripstats{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:7px 0 18px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--muted);border-radius:999px;padding:11px 16px;font-weight:800}
+.tab.active{background:linear-gradient(135deg,rgba(255,95,162,.22),rgba(185,140,255,.16));border-color:rgba(255,141,192,.35);color:#fff}
+.controls{display:grid;grid-template-columns:1.5fr repeat(3,.7fr) auto;gap:10px;position:sticky;top:71px;z-index:10;padding:12px 0;background:linear-gradient(var(--bg) 70%,transparent)}
+.search,.select{background:var(--panel);border:1px solid var(--line);color:white;border-radius:15px;padding:13px 14px;outline:none;width:100%}
+.search:focus,.select:focus{border-color:rgba(255,141,192,.5)}
+.compare-btn{border:0;border-radius:15px;padding:13px 16px;color:white;font-weight:900;background:linear-gradient(135deg,var(--pink),#cf58c8);box-shadow:0 10px 28px rgba(255,95,162,.2)}
+.data-note{padding:12px 14px;border:1px solid rgba(110,231,183,.16);background:rgba(110,231,183,.045);color:#bfcac5;border-radius:14px;font-size:12px;line-height:1.5;margin:5px 0 4px}.data-note b{color:#eafff5}.section-head{display:flex;justify-content:space-between;align-items:end;margin:25px 0 15px}
+.section-head h2{margin:0;font-size:25px;letter-spacing:-1px}
+.section-head span{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{position:relative;background:linear-gradient(150deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.22s;box-shadow:0 12px 40px rgba(0,0,0,.16)}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,141,192,.27);box-shadow:var(--shadow)}
+.cover{height:170px;position:relative;overflow:hidden;background:linear-gradient(135deg,#3a172a,#251a38)}
+.cover .emoji{position:absolute;inset:0;display:grid;place-items:center;font-size:62px;filter:drop-shadow(0 10px 25px rgba(0,0,0,.25))}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.48))}
+.badge{position:absolute;z-index:2;top:12px;left:12px;background:rgba(12,9,15,.72);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);padding:7px 9px;border-radius:999px;font-size:11px;font-weight:900}
+.fav{position:absolute;z-index:3;top:10px;right:10px;width:37px;height:37px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(12,9,15,.66);color:white;font-size:18px}
+.fav.on{color:#ff75ac}
+.body{padding:16px}
+.titleline{display:flex;justify-content:space-between;gap:10px}
+.titleline h3{margin:0;font-size:18px;letter-spacing:-.3px}
+.rating{white-space:nowrap;color:var(--gold);font-weight:900;font-size:13px}
+.location{color:var(--muted);font-size:12px;margin:7px 0 12px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px}
+.tag{padding:6px 8px;border-radius:9px;background:rgba(255,255,255,.055);color:#d8cbd9;font-size:11px}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px}
+.meta div{padding:9px 10px;background:rgba(0,0,0,.14);border-radius:11px}
+.meta b{display:block;font-size:12px}.meta span{font-size:11px;color:var(--muted)}
+.actions{display:flex;gap:7px}
+.actions button,.actions a{flex:1;border:1px solid var(--line);background:rgba(255,255,255,.04);color:white;border-radius:11px;padding:10px 8px;font-weight:800;font-size:12px;text-align:center}
+.actions .primary{background:linear-gradient(135deg,rgba(255,95,162,.25),rgba(185,140,255,.2));border-color:rgba(255,141,192,.25)}
+.empty{padding:50px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:20px}
+.comparebar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(130%);z-index:50;width:min(760px,calc(100% - 28px));background:rgba(25,16,30,.93);backdrop-filter:blur(24px);border:1px solid rgba(255,141,192,.2);border-radius:22px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 25px 80px rgba(0,0,0,.5);transition:.3s}
+.comparebar.show{transform:translateX(-50%) translateY(0)}
+.comparechips{display:flex;gap:7px;overflow:auto;flex:1}
+.chip{white-space:nowrap;background:rgba(255,255,255,.06);padding:8px 10px;border-radius:10px;font-size:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(8px);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.open{display:flex}
+.modalbox{width:min(1000px,100%);max-height:90vh;overflow:auto;background:#151019;border:1px solid var(--line);border-radius:28px;box-shadow:0 40px 100px rgba(0,0,0,.6);padding:22px}
+.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.modalhead h2{margin:0}
+.close{width:40px;height:40px;border:1px solid var(--line);background:var(--panel);color:white;border-radius:12px}
+.comparetable{width:100%;border-collapse:collapse;font-size:13px}
+.comparetable th,.comparetable td{padding:13px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.comparetable th{color:var(--muted);font-weight:700}
+.winner{color:var(--green);font-weight:900}
+.favorites-note{margin:18px 0 0;color:var(--muted);font-size:12px}
+footer{text-align:center;color:#776d79;padding:45px 0 10px;font-size:12px}
+.toast{position:fixed;z-index:100;right:18px;bottom:18px;background:#fff;color:#161018;padding:12px 15px;border-radius:13px;font-weight:800;transform:translateY(100px);transition:.25s;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.toast.show{transform:translateY(0)}
+@media(max-width:1000px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.controls{grid-template-columns:1fr 1fr 1fr}.controls .search{grid-column:1/-1}}
+@media(max-width:650px){.app{padding:12px 12px 90px}.navlinks{display:none}.hero{padding-top:30px}h1{font-size:50px;letter-spacing:-3px}.grid{grid-template-columns:1fr}.controls{top:66px;grid-template-columns:1fr 1fr}.controls .search{grid-column:1/-1}.compare-btn{grid-column:1/-1}.cover{height:185px}.trip-card{padding:18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand"><div class="logo">♡</div><div>Fındık <small>Gezi Rehberi</small></div></div>
+    <div class="navlinks">
+      <button onclick="setCategory('all')">Keşfet</button>
+      <button onclick="setCategory('Beach')">Beach</button>
+      <button onclick="setCategory('Restoran')">Restoran</button>
+      <button onclick="setCategory('Dondurma')">Dondurma</button>
+      <button onclick="setCategory('Alışveriş')">Alışveriş</button>
+    </div>
+  </div>
+</header>
+
+<main class="app">
+<section class="hero">
+  <div>
+    <div class="kicker">🇬🇷 Yunanistan • İki kişilik mini rehber</div>
+    <h1>Biraz deniz,<br><span class="gradient">çokça aşk.</span></h1>
+    <p>Halkidiki, Dedeağaç ve Thassos için favori mekanlarını bul, bütçene göre süz, puanları karşılaştır ve tek dokunuşla haritaya git.</p>
+  </div>
+  <div class="trip-card">
+    <div class="kicker">NİLSSB'NİN GEZİ PLANI</div>
+    <div class="big">Halkidiki → Thassos</div>
+    <div class="mini">Beach • yemek • dondurma • alışveriş</div>
+    <div class="progress"><i></i></div>
+    <div class="tripstats"><span>Keşfedilecek 18 mekan</span><span>♡ favoriler</span></div>
+  </div>
+</section>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" data-city="all" onclick="setCity('all',this)">✨ Hepsi</button>
+  <button class="tab" data-city="Halkidiki" onclick="setCity('Halkidiki',this)">🏖️ Halkidiki</button>
+  <button class="tab" data-city="Dedeağaç" onclick="setCity('Dedeağaç',this)">🌊 Dedeağaç</button>
+  <button class="tab" data-city="Thassos" onclick="setCity('Thassos',this)">🐚 Thassos</button>
+</div>
+
+<div class="controls">
+  <input class="search" id="search" placeholder="🔎 Mekan, plaj, yemek, semt ara..." oninput="render()">
+  <select class="select" id="type" onchange="render()">
+    <option value="all">Tüm kategoriler</option><option>Beach</option><option>Restoran</option><option>Dondurma</option><option>Alışveriş</option>
+  </select>
+  <select class="select" id="price" onchange="render()">
+    <option value="all">💶 Her bütçe</option><option value="1">€ Ekonomik</option><option value="2">€€ Orta</option><option value="3">€€€ Premium</option>
+  </select>
+  <select class="select" id="sort" onchange="render()">
+    <option value="rating">⭐ Puan</option><option value="price">💶 Ucuzdan pahalıya</option><option value="name">A–Z</option>
+  </select>
+  <button class="compare-btn" onclick="openCompare()">Karşılaştır <span id="compareCount">0</span></button>
+</div>
+
+<div class="data-note">🔎 <b>Veri kuralı:</b> Doğrulanamayan puan/fiyat tahmin edilmiyor.</div><div class="section-head"><h2 id="resultTitle">Fındık'ın seçtikleri</h2><span id="resultCount"></span></div>
+<div class="grid" id="grid"></div>
+
+<footer>♡ Nilssb Rehber • Fındık Gezi Rehberi • Veriler örnek/başlangıç listesidir. GitHub Pages'te tek dosya olarak çalışır.</footer>
+</main>
+
+<div class="comparebar" id="compareBar">
+  <div class="comparechips" id="compareChips"></div>
+  <button class="compare-btn" onclick="openCompare()">Karşılaştır</button>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modalbox">
+    <div class="modalhead"><h2>♡ Mekan karşılaştırması</h2><button class="close" onclick="closeModal()">×</button></div>
+    <div id="compareContent"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const places=[{"id":1,"name":"Sorelle Gelateria","city":"Halkidiki","type":"Dondurma","rating":4.9,"reviews":97,"source":"Google","price":1,"budget":"€","tags":["Psakoudia","dondurma"],"emoji":"🍦","vibe":"Psakoudia • dondurma","note":"Google 4.9/5 • 97 değerlendirme","maps":"Sorelle gelateria Psakoudia Greece"},{"id":2,"name":"Myra Beach Bakery Bar","city":"Halkidiki","type":"Dondurma","rating":4.9,"reviews":258,"source":"Google","price":1,"budget":"€","tags":["Nikiti","bakery/tatlı"],"emoji":"🥐","vibe":"Nikiti • bakery/tatlı","note":"Google 4.9/5 • 258 değerlendirme","maps":"Myra beach bakery bar Nikiti Greece"},{"id":3,"name":"Blue Senses Beach Restaurant Bar","city":"Halkidiki","type":"Restoran","rating":4.7,"reviews":1414,"source":"Google","price":2,"budget":"€15–35","tags":["Sarti","beach restaurant"],"emoji":"🌊","vibe":"Sarti • beach restaurant","note":"Google 4.7/5 • 1.414 değerlendirme • €15–35","maps":"Blue Senses Beach Restaurant Bar Sarti Greece"},{"id":4,"name":"Meraklou Icecream","city":"Halkidiki","type":"Dondurma","rating":4.8,"reviews":206,"source":"Google","price":1,"budget":"€","tags":["Afitos","dondurma"],"emoji":"🍨","vibe":"Afitos • dondurma","note":"Google 4.8/5 • 206 değerlendirme","maps":"Meraklou Icecream Afitos Greece"},{"id":5,"name":"Ocean Fregio Beyond Blue","city":"Halkidiki","type":"Dondurma","rating":4.5,"reviews":482,"source":"Google","price":1,"budget":"€","tags":["Pefkochori","dondurma"],"emoji":"🍦","vibe":"Pefkochori • dondurma","note":"Google 4.5/5 • 482 değerlendirme","maps":"Ocean Fregio Beyond Blue Pefkochori Greece"},{"id":6,"name":"To Spitaki","city":"Halkidiki","type":"Dondurma","rating":4.5,"reviews":1410,"source":"Google","price":1,"budget":"€","tags":["Nikiti","dondurma"],"emoji":"🍦","vibe":"Nikiti • dondurma","note":"Google 4.5/5 • 1.410 değerlendirme","maps":"To Spitaki Nikiti Greece"},{"id":7,"name":"Manassu Beach Bar and Restaurant","city":"Halkidiki","type":"Restoran","rating":4.4,"reviews":3696,"source":"Google","price":3,"budget":"€20–50","tags":["Sarti","beach bar/restoran"],"emoji":"🍹","vibe":"Sarti • beach bar/restoran","note":"Google 4.4/5 • 3.696 değerlendirme • €20–50","maps":"Manassu Beach Bar and Restaurant Halkidiki Greece"},{"id":8,"name":"Gelateria Ksilaki","city":"Halkidiki","type":"Dondurma","rating":4.7,"reviews":2068,"source":"Google","price":1,"budget":"€","tags":["Nikiti","dondurma"],"emoji":"🍧","vibe":"Nikiti • dondurma","note":"Google 4.7/5 • 2.068 değerlendirme","maps":"Gelateria Ksilaki Nikiti Greece"},{"id":9,"name":"Anemoni Gelateria-Patisserie","city":"Halkidiki","type":"Dondurma","rating":4.8,"reviews":353,"source":"Google","price":1,"budget":"€","tags":["Nea Skioni","gelato/pastane"],"emoji":"🍰","vibe":"Nea Skioni • gelato/pastane","note":"Google 4.8/5 • 353 değerlendirme","maps":"Anemoni Gelateria Patisserie Nea Skioni Greece"},{"id":10,"name":"Kukunari Beach Bar","city":"Halkidiki","type":"Beach","rating":4.4,"reviews":1128,"source":"Google","price":2,"budget":"€15–35","tags":["Nikiti","beach bar"],"emoji":"🏖️","vibe":"Nikiti • beach bar","note":"Google 4.4/5 • 1.128 değerlendirme • €15–35","maps":"Kukunari Beach Bar Nikiti Greece"},{"id":11,"name":"Fiki Beach Bar & Restaurant","city":"Halkidiki","type":"Restoran","rating":4.4,"reviews":1882,"source":"Google","price":3,"budget":"€20–50","tags":["Pefkochori","beach restaurant"],"emoji":"🌴","vibe":"Pefkochori • beach restaurant","note":"Google 4.4/5 • 1.882 değerlendirme • €20–50","maps":"Fiki Beach Bar Restaurant Pefkochori Greece"},{"id":12,"name":"Via Gelato","city":"Halkidiki","type":"Dondurma","rating":4.7,"reviews":238,"source":"Google","price":1,"budget":"€","tags":["Siviri","gelato"],"emoji":"🍨","vibe":"Siviri • gelato","note":"Google 4.7/5 • 238 değerlendirme","maps":"Via Gelato Siviri Greece"},{"id":13,"name":"Navagos Beach Bar Paliouri","city":"Halkidiki","type":"Restoran","rating":4.5,"reviews":3100,"source":"Google","price":2,"budget":"€15–35","tags":["Paliouri","beach restaurant"],"emoji":"🌊","vibe":"Paliouri • beach restaurant","note":"Google 4.5/5 • 3.100 değerlendirme • €15–35","maps":"Navagos Beach Bar Paliouri Greece"},{"id":14,"name":"Elia","city":"Halkidiki","type":"Restoran","rating":4.4,"reviews":1485,"source":"Google","price":2,"budget":"€15–40","tags":["Trikorfo","restoran"],"emoji":"🍽️","vibe":"Trikorfo • restoran","note":"Google 4.4/5 • 1.485 değerlendirme • €15–40","maps":"Elia Trikorfo Halkidiki Greece"},{"id":15,"name":"Tigania Beach Bar","city":"Halkidiki","type":"Beach","rating":4.1,"reviews":3804,"source":"Google","price":2,"budget":"€10–30","tags":["Sikia","beach bar"],"emoji":"🏝️","vibe":"Sikia • beach bar","note":"Google 4.1/5 • 3.804 değerlendirme • €10–30","maps":"Tigania Beach Bar Sikia Greece"},{"id":16,"name":"Pasir All Day Beach Bar & More","city":"Halkidiki","type":"Beach","rating":4.5,"reviews":989,"source":"Google","price":1,"budget":"€5–20","tags":["Kalyves","beach bar"],"emoji":"☀️","vibe":"Kalyves • beach bar","note":"Google 4.5/5 • 989 değerlendirme • €5–20","maps":"Pasir All Day Beach Bar Kalyves Halkidiki Greece"},{"id":17,"name":"Italian flavours (to italiko)","city":"Halkidiki","type":"Restoran","rating":4.9,"reviews":142,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Hanioti","İtalyan/pizza"],"emoji":"🍕","vibe":"Hanioti • İtalyan/pizza","note":"Tripadvisor 4.9/5 • 142 değerlendirme","maps":"Italian flavours to italiko Hanioti Greece"},{"id":18,"name":"Fregio - Kallithea","city":"Halkidiki","type":"Dondurma","rating":4.6,"reviews":116,"source":"Tripadvisor","price":2,"budget":"$$","tags":["Kallithea","dondurma"],"emoji":"🍦","vibe":"Kallithea • dondurma","note":"Tripadvisor 4.6/5 • 116 değerlendirme","maps":"Fregio Kallithea Halkidiki Greece"},{"id":19,"name":"Kavourotripes / Orange Beach","city":"Halkidiki","type":"Beach","rating":null,"reviews":null,"source":"Discover Greece","price":1,"budget":"Bilgi yok","tags":["Sithonia","doğal koy"],"emoji":"🧡","vibe":"Sithonia • doğal koy","note":"Resmî turizm rehberinde öne çıkıyor; doğrulanmış puan bulunamadı.","maps":"Kavourotripes Orange Beach Halkidiki Greece"},{"id":20,"name":"Karidi Beach","city":"Halkidiki","type":"Beach","rating":null,"reviews":null,"source":"Discover Greece","price":1,"budget":"Bilgi yok","tags":["Vourvourou","doğal plaj"],"emoji":"🐚","vibe":"Vourvourou • doğal plaj","note":"Resmî turizm rehberinde öne çıkıyor; doğrulanmış puan bulunamadı.","maps":"Karidi Beach Vourvourou Greece"},{"id":21,"name":"Kalogria Beach","city":"Halkidiki","type":"Beach","rating":null,"reviews":null,"source":"Discover Greece","price":1,"budget":"Bilgi yok","tags":["Sithonia","kum/deniz"],"emoji":"🌊","vibe":"Sithonia • kum/deniz","note":"Resmî turizm rehberinde öne çıkıyor; doğrulanmış puan bulunamadı.","maps":"Kalogria Beach Halkidiki Greece"},{"id":22,"name":"Golden Beach","city":"Thassos","type":"Beach","rating":4.3,"reviews":1089,"source":"Tripadvisor","price":2,"budget":"$$","tags":["Thassos","kum plaj"],"emoji":"🏖️","vibe":"Thassos • kum plaj","note":"Tripadvisor 4.3/5 • 1.089 değerlendirme","maps":"Golden Beach Thassos Greece"},{"id":23,"name":"Limenas Beach","city":"Thassos","type":"Beach","rating":4.1,"reviews":116,"source":"Tripadvisor","price":1,"budget":"Bilgi yok","tags":["Limenas","şehir plajı"],"emoji":"🌊","vibe":"Limenas • şehir plajı","note":"Tripadvisor 4.1/5 • 116 değerlendirme","maps":"Limenas Beach Thassos Greece"},{"id":24,"name":"Nisteri Beach","city":"Thassos","type":"Beach","rating":4.5,"reviews":39,"source":"Tripadvisor","price":1,"budget":"Bilgi yok","tags":["Limenas","sakin"],"emoji":"🐬","vibe":"Limenas • sakin","note":"Tripadvisor 4.5/5 • 39 değerlendirme","maps":"Nisteri Beach Thassos Greece"},{"id":25,"name":"La Scala Beach","city":"Thassos","type":"Beach","rating":3.6,"reviews":654,"source":"Tripadvisor","price":2,"budget":"$$","tags":["Limenas","beach club"],"emoji":"🍹","vibe":"Limenas • beach club","note":"Tripadvisor 3.6/5 • 654 değerlendirme","maps":"La Scala Beach Thassos Greece"},{"id":26,"name":"Glyfada Beach","city":"Thassos","type":"Beach","rating":4.0,"reviews":258,"source":"Tripadvisor","price":1,"budget":"Bilgi yok","tags":["Limenas","kum"],"emoji":"🌴","vibe":"Limenas • kum","note":"Tripadvisor 4.0/5 • 258 değerlendirme","maps":"Glyfada Beach Thassos Greece"},{"id":27,"name":"Souvlike","city":"Thassos","type":"Restoran","rating":4.7,"reviews":405,"source":"Tripadvisor","price":1,"budget":"$","tags":["Limenas","gyros/uygun"],"emoji":"🥙","vibe":"Limenas • gyros/uygun","note":"Tripadvisor 4.7/5 • 405 değerlendirme • $","maps":"Souvlike Thassos Greece"},{"id":28,"name":"Fabrica","city":"Thassos","type":"Restoran","rating":4.7,"reviews":249,"source":"Tripadvisor","price":2,"budget":"$$","tags":["Limenas","İtalyan/pizza"],"emoji":"🍕","vibe":"Limenas • İtalyan/pizza","note":"Tripadvisor 4.7/5 • 249 değerlendirme","maps":"Fabrica Thassos Limenas Greece"},{"id":29,"name":"To Tavernaki","city":"Thassos","type":"Restoran","rating":4.4,"reviews":1520,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Limenas","deniz ürünleri"],"emoji":"🐟","vibe":"Limenas • deniz ürünleri","note":"Tripadvisor 4.4/5 • 1.520 değerlendirme","maps":"To Tavernaki Thassos Greece"},{"id":30,"name":"Gefstiko Sea Food","city":"Thassos","type":"Restoran","rating":4.7,"reviews":152,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Limenas","deniz ürünleri"],"emoji":"🦐","vibe":"Limenas • deniz ürünleri","note":"Tripadvisor 4.7/5 • 152 değerlendirme","maps":"Gefstiko Sea Food Thassos Greece"},{"id":31,"name":"Ambrosia Restaurant","city":"Thassos","type":"Restoran","rating":4.5,"reviews":414,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Limenas","Yunan"],"emoji":"🍽️","vibe":"Limenas • Yunan","note":"Tripadvisor 4.5/5 • 414 değerlendirme","maps":"Ambrosia Restaurant Thassos Greece"},{"id":32,"name":"Ftapodi","city":"Thassos","type":"Restoran","rating":4.6,"reviews":217,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Limenas","deniz ürünleri"],"emoji":"🐙","vibe":"Limenas • deniz ürünleri","note":"Tripadvisor 4.6/5 • 217 değerlendirme","maps":"Ftapodi Thassos Greece"},{"id":33,"name":"Chocoland Park","city":"Thassos","type":"Dondurma","rating":4.6,"reviews":156,"source":"Tripadvisor","price":1,"budget":"$","tags":["Tatlı","waffle","loukoumades"],"emoji":"🍫","vibe":"Tatlı • waffle • loukoumades","note":"Tripadvisor 4.6/5 • 156 değerlendirme • $","maps":"Chocoland Park Thassos Greece"},{"id":34,"name":"Allotino","city":"Thassos","type":"Dondurma","rating":4.9,"reviews":34,"source":"Tripadvisor","price":1,"budget":"$","tags":["Tatlı","cafe"],"emoji":"🍨","vibe":"Tatlı • cafe","note":"Tripadvisor 4.9/5 • 34 değerlendirme; örneklem küçük.","maps":"Allotino Thassos Greece"},{"id":35,"name":"My Yoghurt","city":"Thassos","type":"Dondurma","rating":4.9,"reviews":10,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Limenaria","yoğurt/tatlı"],"emoji":"🍦","vibe":"Limenaria • yoğurt/tatlı","note":"Tripadvisor 4.9/5 • 10 değerlendirme; örneklem çok küçük.","maps":"My Yoghurt Thassos Greece"},{"id":36,"name":"Os Ev Parestite","city":"Thassos","type":"Dondurma","rating":4.5,"reviews":57,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Limenaria","pastane"],"emoji":"🧁","vibe":"Limenaria • pastane","note":"Tripadvisor 4.5/5 • 57 değerlendirme","maps":"Os Ev Parestite Limenaria Thassos Greece"},{"id":37,"name":"Thalassa Taverna","city":"Thassos","type":"Restoran","rating":4.6,"reviews":285,"source":"Tripadvisor","price":1,"budget":"$","tags":["Thassos","deniz ürünleri"],"emoji":"🦑","vibe":"Thassos • deniz ürünleri","note":"Tripadvisor 4.6/5 • 285 değerlendirme • $","maps":"Thalassa Taverna Thassos Greece"},{"id":38,"name":"Palude Taverna","city":"Thassos","type":"Restoran","rating":4.6,"reviews":561,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Thassos","taverna"],"emoji":"🍷","vibe":"Thassos • taverna","note":"Tripadvisor 4.6/5 • 561 değerlendirme","maps":"Palude Taverna Thassos Greece"},{"id":39,"name":"Restaurant NISI Island","city":"Thassos","type":"Restoran","rating":4.6,"reviews":677,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Thassos","sahil"],"emoji":"🏝️","vibe":"Thassos • sahil","note":"Tripadvisor 4.6/5 • 677 değerlendirme","maps":"Restaurant NISI Island Thassos Greece"},{"id":40,"name":"Alexandroupoli Yeni Sahil","city":"Dedeağaç","type":"Beach","rating":4.6,"reviews":254,"source":"Google","price":1,"budget":"Ücretsiz alan","tags":["Şehir","sahil yürüyüşü"],"emoji":"🌅","vibe":"Şehir • sahil yürüyüşü","note":"Google 4.6/5 • 254 değerlendirme","maps":"Dedeağaç Yeni Sahil Alexandroupoli Greece"},{"id":41,"name":"Mesimvria Beach","city":"Dedeağaç","type":"Beach","rating":4.8,"reviews":130,"source":"Google","price":1,"budget":"Bilgi yok","tags":["Mesimvria","plaj"],"emoji":"🌊","vibe":"Mesimvria • plaj","note":"Google 4.8/5 • 130 değerlendirme","maps":"Mesimvria Beach Alexandroupoli Greece"},{"id":42,"name":"EOΤ Alexandroupoli Beach","city":"Dedeağaç","type":"Beach","rating":4.3,"reviews":414,"source":"Google","price":1,"budget":"Bilgi yok","tags":["Alexandroupoli","plaj"],"emoji":"☀️","vibe":"Alexandroupoli • plaj","note":"Google 4.3/5 • 414 değerlendirme","maps":"EOT Beach Alexandroupoli Greece"},{"id":43,"name":"Gelateria Italos","city":"Dedeağaç","type":"Dondurma","rating":4.6,"reviews":1036,"source":"Google","price":1,"budget":"€","tags":["Merkez","gelato"],"emoji":"🍦","vibe":"Merkez • gelato","note":"Google 4.6/5 • 1.036 değerlendirme. Tripadvisor'da ayrıca 4.7/5 (77) görünüyor.","maps":"Gelateria Italos Alexandroupoli Greece"},{"id":44,"name":"Slourp Ice Cream Waffles & Coffee","city":"Dedeağaç","type":"Dondurma","rating":4.7,"reviews":153,"source":"Google","price":1,"budget":"€","tags":["Waffle","dondurma","kahve"],"emoji":"🧇","vibe":"Waffle • dondurma • kahve","note":"Google 4.7/5 • 153 değerlendirme","maps":"Slourp Ice Cream Waffles Coffee Alexandroupoli Greece"},{"id":45,"name":"Kate's Sweets & Magic Treats","city":"Dedeağaç","type":"Dondurma","rating":4.9,"reviews":226,"source":"Google","price":1,"budget":"€","tags":["Tatlı","merkez"],"emoji":"🍰","vibe":"Tatlı • merkez","note":"Google 4.9/5 • 226 değerlendirme","maps":"Kate's Sweets Magic Treats Alexandroupoli Greece"},{"id":46,"name":"Loukoulos","city":"Dedeağaç","type":"Restoran","rating":4.5,"reviews":7241,"source":"Google","price":2,"budget":"€15–25","tags":["Yunan","çok popüler"],"emoji":"🍽️","vibe":"Yunan • çok popüler","note":"Google 4.5/5 • 7.241 değerlendirme • €15–25","maps":"Loukoulos Alexandroupoli Greece"},{"id":47,"name":"γη & ύδωρ","city":"Dedeağaç","type":"Restoran","rating":4.8,"reviews":143,"source":"Google","price":2,"budget":"€15–35","tags":["Akşam","merkez"],"emoji":"🍷","vibe":"Akşam • merkez","note":"Google 4.8/5 • 143 değerlendirme • €15–35","maps":"γη ύδωρ Alexandroupoli Greece"},{"id":48,"name":"Zourafa","city":"Dedeağaç","type":"Restoran","rating":4.4,"reviews":3188,"source":"Google","price":2,"budget":"€15–35","tags":["Deniz ürünleri","liman"],"emoji":"🦐","vibe":"Deniz ürünleri • liman","note":"Google 4.4/5 • 3.188 değerlendirme • €15–35","maps":"Zourafa Alexandroupoli Greece"},{"id":49,"name":"The Greek Butcher","city":"Dedeağaç","type":"Restoran","rating":4.8,"reviews":324,"source":"Google","price":1,"budget":"€10–15","tags":["Et","uygun"],"emoji":"🥩","vibe":"Et • uygun","note":"Google 4.8/5 • 324 değerlendirme • €10–15","maps":"The Greek Butcher Alexandroupoli Greece"},{"id":50,"name":"Taverna Konaki","city":"Dedeağaç","type":"Restoran","rating":4.6,"reviews":923,"source":"Google","price":2,"budget":"€15–25","tags":["Taverna","meze"],"emoji":"🍷","vibe":"Taverna • meze","note":"Google 4.6/5 • 923 değerlendirme • €15–25","maps":"Taverna Konaki Alexandroupoli Greece"},{"id":51,"name":"Ouzeri Alexis","city":"Dedeağaç","type":"Restoran","rating":4.5,"reviews":328,"source":"Tripadvisor","price":1,"budget":"$","tags":["Deniz ürünleri","uygun"],"emoji":"🐙","vibe":"Deniz ürünleri • uygun","note":"Tripadvisor 4.5/5 • 328 değerlendirme • $","maps":"Ouzeri Alexis Alexandroupoli Greece"},{"id":52,"name":"Kapari","city":"Dedeağaç","type":"Restoran","rating":4.8,"reviews":92,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Akşam","deniz"],"emoji":"🍽️","vibe":"Akşam • deniz","note":"Tripadvisor 4.8/5 • 92 değerlendirme","maps":"Kapari Alexandroupoli Greece"},{"id":53,"name":"Nisiotiko","city":"Dedeağaç","type":"Restoran","rating":4.3,"reviews":936,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Deniz ürünleri","meze"],"emoji":"🐟","vibe":"Deniz ürünleri • meze","note":"Tripadvisor 4.3/5 • 936 değerlendirme","maps":"Nisiotiko Alexandroupoli Greece"},{"id":54,"name":"Hovoli","city":"Dedeağaç","type":"Restoran","rating":4.3,"reviews":315,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Et","kebap","meze"],"emoji":"🥩","vibe":"Et • kebap • meze","note":"Tripadvisor 4.3/5 • 315 değerlendirme","maps":"Hovoli Alexandroupoli Greece"},{"id":55,"name":"+Ousia","city":"Dedeağaç","type":"Restoran","rating":4.5,"reviews":158,"source":"Tripadvisor","price":2,"budget":"$$–$$$","tags":["Deniz ürünleri","meze"],"emoji":"🦑","vibe":"Deniz ürünleri • meze","note":"Tripadvisor 4.5/5 • 158 değerlendirme","maps":"+Ousia Alexandroupoli Greece"},{"id":56,"name":"Evroshop","city":"Dedeağaç","type":"Alışveriş","rating":4.9,"reviews":473,"source":"Google","price":1,"budget":"Uygun","tags":["Market","alışveriş"],"emoji":"🛒","vibe":"Market • alışveriş","note":"Google 4.9/5 • 473 değerlendirme; fiyat tahmini yapılmadı.","maps":"Evroshop Alexandroupoli Greece"},{"id":57,"name":"Georgiadis Accessories & Souvenirs","city":"Dedeağaç","type":"Alışveriş","rating":5.0,"reviews":4220,"source":"Google","price":2,"budget":"Bilgi yok","tags":["Hediyelik","takı"],"emoji":"🎁","vibe":"Hediyelik • takı","note":"Google 5.0/5 • 4.220 değerlendirme; fiyat tahmini yapılmadı.","maps":"Georgiadis Accessories Souvenirs Alexandroupoli Greece"},{"id":58,"name":"Hondos Center","city":"Dedeağaç","type":"Alışveriş","rating":4.4,"reviews":606,"source":"Google","price":2,"budget":"Bilgi yok","tags":["Kozmetik","mağaza"],"emoji":"🛍️","vibe":"Kozmetik • mağaza","note":"Google 4.4/5 • 606 değerlendirme; fiyat tahmini yapılmadı.","maps":"Hondos Center Alexandroupoli Greece"}];
+
+let city="all", compare=[], favorites=JSON.parse(localStorage.getItem("nilssb-favs")||"[]");
+
+function setCity(c,el){
+ city=c;
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ if(el)el.classList.add("active"); else document.querySelector(`[data-city="${c}"]`)?.classList.add("active");
+ render();
+}
+function setCategory(t){document.getElementById("type").value=t;render();window.scrollTo({top:500,behavior:"smooth"})}
+function mapsUrl(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
+function isFav(id){return favorites.includes(id)}
+function toggleFav(id){
+ favorites=isFav(id)?favorites.filter(x=>x!==id):[...favorites,id];
+ localStorage.setItem("nilssb-favs",JSON.stringify(favorites)); render();
+ toast(isFav(id)?"♡ Favorilere eklendi":"Favorilerden çıkarıldı");
+}
+function toggleCompare(id){
+ if(compare.includes(id)) compare=compare.filter(x=>x!==id);
+ else {if(compare.length>=4){toast("En fazla 4 mekan karşılaştırabilirsin.");return} compare.push(id)}
+ updateCompareBar();render();
+}
+function updateCompareBar(){
+ document.getElementById("compareCount").textContent=compare.length;
+ const bar=document.getElementById("compareBar"), chips=document.getElementById("compareChips");
+ bar.classList.toggle("show",compare.length>0);
+ chips.innerHTML=compare.map(id=>{let p=places.find(x=>x.id===id);return `<span class="chip">${p.emoji} ${p.name}</span>`}).join("");
+}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim(), type=document.getElementById("type").value, price=document.getElementById("price").value, sort=document.getElementById("sort").value;
+ let arr=places.filter(p=>(city==="all"||p.city===city)&&(type==="all"||p.type===type)&&(price==="all"||p.price==price)&&(!q||[p.name,p.city,p.type,p.vibe,p.note,...p.tags].join(" ").toLowerCase().includes(q)));
+ if(sort==="rating")arr.sort((a,b)=>(b.rating??-1)-(a.rating??-1)); if(sort==="price")arr.sort((a,b)=>a.price-b.price||b.rating-a.rating); if(sort==="name")arr.sort((a,b)=>a.name.localeCompare(b.name,"tr"));
+ document.getElementById("resultCount").textContent=arr.length+" mekan";
+ document.getElementById("resultTitle").textContent=city==="all"?"Fındık'ın seçtikleri":city+" seçkisi";
+ document.getElementById("grid").innerHTML=arr.length?arr.map(card).join(""):`<div class="empty" style="grid-column:1/-1">🥹 Bu filtrelerle mekan bulamadık.<br>Filtreleri biraz gevşetmeyi dene.</div>`;
+ updateCompareBar();
+}
+function card(p){
+ let selected=compare.includes(p.id);
+ return `<article class="card">
+  <div class="cover"><span class="badge">${p.city} • ${p.type}</span><button class="fav ${isFav(p.id)?"on":""}" onclick="toggleFav(${p.id})">${isFav(p.id)?"♥":"♡"}</button><div class="emoji">${p.emoji}</div></div>
+  <div class="body"><div class="titleline"><h3>${p.name}</h3><span class="rating">${p.rating===null?"Puan yok":"★ "+p.rating}</span></div>
+  <div class="location">📍 ${p.city} • ${p.vibe}</div>
+  <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+  <div class="meta"><div><b>${p.budget}</b><span>kaynakta görünen fiyat</span></div><div><b>${p.reviews?p.reviews.toLocaleString("tr-TR")+" yorum":"—"}</b><span>${p.source} verisi</span></div></div>
+  <div class="actions"><a class="primary" target="_blank" rel="noopener" href="${mapsUrl(p.maps)}">📍 Haritada</a><button onclick="toggleCompare(${p.id})">${selected?"✓ Seçildi":"＋ Karşılaştır"}</button></div>
+  <div class="favorites-note">${p.note}</div></div></article>`;
+}
+function openCompare(){
+ if(compare.length<2){toast("Karşılaştırmak için en az 2 mekan seç.");return}
+ const arr=compare.map(id=>places.find(p=>p.id===id));
+ const bestRating=Math.max(...arr.map(p=>p.rating)), bestPrice=Math.min(...arr.map(p=>p.price));
+ document.getElementById("compareContent").innerHTML=`<table class="comparetable"><thead><tr><th>Özellik</th>${arr.map(p=>`<th>${p.emoji} ${p.name}</th>`).join("")}</tr></thead><tbody>
+ <tr><th>Konum</th>${arr.map(p=>`<td>${p.city}</td>`).join("")}</tr>
+ <tr><th>Kategori</th>${arr.map(p=>`<td>${p.type}</td>`).join("")}</tr>
+ <tr><th>Puan</th>${arr.map(p=>`<td class="${p.rating===bestRating?"winner":""}">★ ${p.rating}${p.rating===bestRating?" • en yüksek":""}</td>`).join("")}</tr>
+ <tr><th>Bütçe</th>${arr.map(p=>`<td class="${p.price===bestPrice?"winner":""}">${p.budget}${p.price===bestPrice?" • en ekonomik":""}</td>`).join("")}</tr>
+ <tr><th>Vibe</th>${arr.map(p=>`<td>${p.vibe}</td>`).join("")}</tr>
+ <tr><th>Etiketler</th>${arr.map(p=>`<td>${p.tags.join(" · ")}</td>`).join("")}</tr>
+ <tr><th>Not</th>${arr.map(p=>`<td>${p.note}</td>`).join("")}</tr>
+ <tr><th>Harita</th>${arr.map(p=>`<td><a class="primary" target="_blank" href="${mapsUrl(p.maps)}">📍 Aç</a></td>`).join("")}</tr>
+ </tbody></table>`;
+ document.getElementById("modal").classList.add("open");
+}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),1800)}
+render();
+</script>
+</body>
+</html>
